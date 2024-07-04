@@ -3,7 +3,6 @@
 from typing import List
 import re
 import logging
-import sys
 
 
 def filter_datum(
