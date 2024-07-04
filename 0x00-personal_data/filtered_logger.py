@@ -71,3 +71,24 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         database=dbname
         )
     return connection
+
+
+def main() -> None:
+    """ Main function """
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users;")
+    for row in cursor:
+        logger = get_logger()
+        field_names = [field[0] for field in cursor.description]
+        record = ''.join('{}={}; '.format(field, value)
+                         for field, value in zip(field_names, row))
+        args = ("user_data", logging.INFO, None, None, record, None, None)
+        log_record = logging.LogRecord(*args)
+        print(RedactingFormatter(PII_FIELDS).format(log_record))
+    cursor.close()
+    db.close()
+
+
+if __name__ == '__main__':
+    main()
