@@ -11,8 +11,8 @@ def filter_datum(
     separator: str
 ) -> str:
     """ returns the log message obfuscated """
-    for field in fields:
-        match = re.search(fr"{field}=([\w\d/]+);", message)
-        if match:
-            message = re.sub(match.group(1), redaction, message)
-    return message
+    return re.sub(
+        fr"({'|'.join(fields)})=[^{separator}]*",
+        lambda m: f"{m.group().split('=')[0]}={redaction}",
+        message
+    )
