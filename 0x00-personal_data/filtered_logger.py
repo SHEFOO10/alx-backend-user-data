@@ -45,6 +45,7 @@ PII_FIELDS = ('email', 'phone', 'ssn', 'password', 'ip')
 
 
 def get_logger() -> logging.Logger:
+    """ Create a new logger """
     logger = logging.Logger('user_data', level=logging.INFO)
     streamHanlder = logging.StreamHandler(sys.stdout)
     formatter = logging.Formatter(RedactingFormatter(PII_FIELDS))
