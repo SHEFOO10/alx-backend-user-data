@@ -59,10 +59,13 @@ class BasicAuth(Auth):
         """
         returns the User instance based on his email and password.
         """
+        from models.base import DATA
         if (
             user_email is None or type(user_email) is not str
             or
             user_pwd is None or type(user_pwd) is not str
+            or
+            len(DATA) == 0
             or
             len(User.search({'email': user_email})) == 0
         ):
