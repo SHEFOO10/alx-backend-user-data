@@ -2,6 +2,7 @@
 """ Auth Class """
 from flask import request
 from typing import List, TypeVar
+import re
 User = TypeVar('User')
 
 
@@ -11,7 +12,12 @@ class Auth:
         """ check if endpoint requires auth
             Returns: bool
         """
-        return False
+        if path is None or excluded_paths is None:
+            return True
+        for authorized_path in excluded_paths:
+            if re.match(path, authorized_path):
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """ Return value of the Authorization Header """
