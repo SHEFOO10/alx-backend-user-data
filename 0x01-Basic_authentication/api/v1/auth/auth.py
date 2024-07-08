@@ -14,8 +14,10 @@ class Auth:
         """
         if path is None or excluded_paths is None:
             return True
-        for authorized_path in excluded_paths:
-            if re.match(path, authorized_path):
+        for i in excluded_paths:
+            if path == i or path.startswith(i):
+                return False
+            if i[-1] == '*' and path.startswith(i[:-1]):
                 return False
         return True
 
