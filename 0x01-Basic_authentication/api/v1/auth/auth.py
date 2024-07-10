@@ -15,7 +15,7 @@ class Auth:
         if path is None or excluded_paths is None:
             return True
         for i in excluded_paths:
-            if path == i or path.startswith(i):
+            if path == i or path.startswith(i) or re.match(path+'/?', i):
                 return False
             if i[-1] == '*' and path.startswith(i[:-1]):
                 return False
