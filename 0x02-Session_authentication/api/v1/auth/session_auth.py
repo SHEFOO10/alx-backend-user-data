@@ -12,6 +12,12 @@ class SessionAuth(Auth):
         """ Create and Returns new session id """
         if user_id is None or type(user_id) is not str:
             return None
-        session_id = uuid4()
+        session_id = str(uuid4())
         SessionAuth.user_id_by_session_id.update({session_id: user_id})
         return session_id
+
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        """ returns a User ID based on a Session ID """
+        if session_id is None or type(session_id) is not str:
+            return None
+        return SessionAuth.user_id_by_session_id.get(session_id, None)
