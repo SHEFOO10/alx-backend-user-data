@@ -47,6 +47,8 @@ class DB:
     def update_user(self, user_id: int, **kwargs) -> None:
         """ update User properties """
         user = self._session.query(User).filter_by(id=user_id).first()
+        if user is None:
+            return None
         for key, value in kwargs.items():
             if not hasattr(user, key):
                 raise ValueError('User Model don\'t have {}'.format(key))
