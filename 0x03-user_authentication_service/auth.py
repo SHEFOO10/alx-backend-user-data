@@ -11,9 +11,9 @@ class Auth:
         self._db = DB()
 
     @staticmethod
-    def _hash_password(password: str) -> str:
+    def _hash_password(password: str) -> bytes:
         import bcrypt
-        return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+        return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
     def register_user(self, email: str, password: str) -> User:
         """ Register User """
