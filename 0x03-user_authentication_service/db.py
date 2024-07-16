@@ -43,3 +43,12 @@ class DB:
         if user is None:
             raise NoResultFound
         return user
+
+    def update_user(self, user_id: int, **kwargs):
+        """ update User properties """
+        user = self._session.query(User).filter_by(id=user_id).first()
+        for key, value in kwargs.items():
+            if not hasattr(user, key):
+                raise ValueError('User Model don\'t have {}'.format(key))
+            setattr(user, key, value)
+        self._session.commit()
