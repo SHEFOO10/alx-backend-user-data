@@ -10,11 +10,6 @@ class Auth:
     def __init__(self):
         self._db = DB()
 
-    @staticmethod
-    def _hash_password(password: str) -> bytes:
-        import bcrypt
-        return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-
     def register_user(self, email: str, password: str) -> User:
         """ Register User """
         user_exists = None
@@ -24,6 +19,11 @@ class Auth:
             pass
         if user_exists:
             raise ValueError("User {} already exists".format(email))
-        hashed_password = Auth._hash_password(password)
+        hashed_password = _hash_password(password)
         user = self._db.add_user(email, hashed_password)
         return user
+
+
+def _hash_password(password: str) -> bytes:
+    import bcrypt
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
