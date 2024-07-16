@@ -44,7 +44,7 @@ class DB:
             raise NoResultFound
         return user
 
-    def update_user(self, user_id: int, **kwargs):
+    def update_user(self, user_id: int, **kwargs) -> None:
         """ update User properties """
         user = self._session.query(User).filter_by(id=user_id).first()
         for key, value in kwargs.items():
