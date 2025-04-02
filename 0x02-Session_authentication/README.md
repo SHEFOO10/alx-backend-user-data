@@ -28,13 +28,18 @@ The session authentication system:
 api/
 ├── v1/
 │   ├── app.py                # Main Flask application
-│   ├── auth/
+│   ├── auth/                 # Authentication classes
 │   │   ├── auth.py           # Base auth class
+│   │   ├── basic_auth.py     # Basic auth implementation
 │   │   └── session_auth.py   # Session auth implementation
 │   └── views/
-│       ├── __init__.py
-│       ├── session_auth.py   # Session auth views (login/logout)
+│       ├── __init__.py       # Views initialization
+│       ├── index.py          # Index view
+│       ├── session_auth.py   # Session auth views
 │       └── users.py          # User management views
+models/
+├── base.py                  # Base model class
+└── user.py                  # User model
 ```
 
 ## Installation & Usage
