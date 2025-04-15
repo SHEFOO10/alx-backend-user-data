@@ -59,7 +59,7 @@ A complete user authentication service with database integration.
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/alx-backend-user-data.git
+   git clone https://github.com/SHEFOO10/alx-backend-user-data.git
    cd alx-backend-user-data
    ```
 
